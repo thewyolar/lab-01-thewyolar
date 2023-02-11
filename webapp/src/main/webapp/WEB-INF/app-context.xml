@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="connection" factory-bean="configuration" factory-method="getConnection" scope="singleton">
+        <constructor-arg value="jdbc:postgresql://localhost:5432/product_shop"/>
+        <constructor-arg value="postgres"/>
+        <constructor-arg value="postgres"/>
+    </bean>
+
+    <bean id="configuration" class="ru.vlsu.ispi.config.Configuration"/>
+
+    <bean id="roleDAO" class="ru.vlsu.ispi.dao.RoleDAO">
+        <constructor-arg ref="connection" />
+    </bean>
+
+    <bean id="userDAO" class="ru.vlsu.ispi.dao.UserDAO">
+        <constructor-arg ref="connection" />
+    </bean>
+
+    <bean id="productDAO" class="ru.vlsu.ispi.dao.ProductDAO">
+        <constructor-arg ref="connection" />
+    </bean>
+
+    <bean id="orderDAO" class="ru.vlsu.ispi.dao.OrderDAO">
+        <constructor-arg ref="connection" />
+    </bean>
+
+    <bean id="userService" class="ru.vlsu.ispi.service.UserService">
+        <constructor-arg ref="userDAO" />
+        <constructor-arg ref="roleDAO" />
+    </bean>
+
+</beans>
