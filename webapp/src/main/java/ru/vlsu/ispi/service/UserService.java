@@ -27,14 +27,14 @@ public class UserService implements IService<User, String> {
     public boolean create(User user) {
         Role userRole = user.getRole();
         if (!isRoleExists(userRole.getName())) {
-            return roleDAO.create(userRole);
+            roleDAO.create(userRole);
+        }
+
+        user.setRole(roleDAO.read(userRole.getName()));
+        if (!isUserExists(user.getUsername())) {
+            return userDAO.create(user);
         } else {
-            user.setRole(roleDAO.read(userRole.getName()));
-            if (!isUserExists(user.getUsername())) {
-                return userDAO.create(user);
-            } else {
-                System.out.println("Пользователь с таким именем уже существует!");
-            }
+            System.out.println("Пользователь с таким именем уже существует!");
         }
         return false;
     }

@@ -51,8 +51,7 @@ public class Order {
                 ", count=" + count +
                 ", user=" + user.toString() +
                 ", product=" + product.toString() +
-                ", date='" + date + '\'' +
-                '}';
+                ", date='" + date + '\'' + '}';
     }
 
     @Override

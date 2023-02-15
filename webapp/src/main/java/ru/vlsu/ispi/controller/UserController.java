@@ -13,17 +13,15 @@ import java.util.List;
 
 @Controller
 public class UserController {
-    private final UserDAO userDAO;
     private final UserService userService;
 
-    public UserController(UserDAO userDAO, UserService userService) {
-        this.userDAO = userDAO;
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/users")
     public String getUsers(Model model) {
-        List<User> users = userDAO.getAll();
+        List<User> users = userService.getAll();
         model.addAttribute("users", users);
         model.addAttribute("user", new User());
         return "users";
@@ -31,31 +29,32 @@ public class UserController {
 
     @GetMapping("/users/{username}")
     public String readUser(@PathVariable("username") String username, Model model) {
-        model.addAttribute("user", userDAO.read(username));
+        model.addAttribute("user", userService.read(username));
         return "user";
     }
 
     @PostMapping("/users/create")
     public String createUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
             return "users";
-        if (user.getId() == 0)
+        } else if (user.getId() == 0) {
             userService.create(user);
-        else
-            userDAO.update(user);
+        } else {
+            userService.update(user);
+        }
         return "redirect:/users";
     }
 
     @GetMapping("/users/delete/{username}")
     public String deleteUser(@PathVariable("username") String username) {
-        userDAO.delete(username);
+        userService.delete(username);
         return "redirect:/users";
     }
 
     @GetMapping("/users/update/{username}")
     public String updateUser(@PathVariable("username") String username, Model model) {
-        model.addAttribute("user", userDAO.read(username));
-        model.addAttribute("users", userDAO.getAll());
+        model.addAttribute("user", userService.read(username));
+        model.addAttribute("users", userService.getAll());
         return "users";
     }
 }

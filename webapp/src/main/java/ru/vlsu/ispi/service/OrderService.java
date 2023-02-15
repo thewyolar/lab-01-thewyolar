@@ -33,6 +33,14 @@ public class OrderService implements IService<Order, Long> {
     public boolean create(Order order) {
         User user = order.getUser();
         Product product = order.getProduct();
+        if (!isUserExists(user.getUsername())) {
+            userDAO.create(user);
+        } else if (!isProductExists(product.getName())) {
+            productDAO.create(product);
+        }
+
+        order.setUser(userDAO.read(user.getUsername()));
+        order.setProduct(productDAO.read(product.getName()));
         if (!isOrderExists(order.getId())) {
             order.setDate(Date.valueOf(LocalDate.now()));
             return orderDAO.create(order);
@@ -78,6 +86,14 @@ public class OrderService implements IService<Order, Long> {
     private boolean isProductExists(String productName) {
         Product product = productDAO.read(productName);
         if (product.getName() != null) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isUserExists(String username) {
+        User user = userDAO.read(username);
+        if (user.getUsername() != null) {
             return true;
         }
         return false;

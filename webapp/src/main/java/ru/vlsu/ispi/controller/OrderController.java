@@ -34,12 +34,13 @@ public class OrderController {
 
     @PostMapping("/orders/create")
     public String createOrder(@Valid @ModelAttribute("order") Order order, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
             return "orders";
-        if (order.getId() == 0)
+        } else if (order.getId() == 0) {
             orderService.create(order);
-        else
+        } else {
             orderService.update(order);
+        }
         return "redirect:/orders";
     }
 

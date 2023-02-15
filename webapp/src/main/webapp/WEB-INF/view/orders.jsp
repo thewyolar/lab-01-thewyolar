@@ -37,12 +37,12 @@
                 </c:otherwise>
             </c:choose>
             <div class="row">
-                <form:label path="user.id"><spring:message text="Id пользователя:" /></form:label><br>
-                <form:input path="user.id" />
+                <form:label path="user.username"><spring:message text="Имя пользователя:" /></form:label><br>
+                <form:input path="user.username" />
             </div>
             <div class="row">
-                <form:label path="product.id"><spring:message text="Id продукта:" /></form:label><br>
-                <form:input path="product.id" />
+                <form:label path="product.name"><spring:message text="Название продукта:" /></form:label><br>
+                <form:input path="product.name" />
             </div>
             <div class="row">
                 <form:label path="count"><spring:message text="Количество:" /></form:label><br>

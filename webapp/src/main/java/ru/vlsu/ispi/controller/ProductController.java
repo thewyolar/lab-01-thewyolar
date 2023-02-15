@@ -34,12 +34,13 @@ public class ProductController {
 
     @PostMapping("/products/create")
     public String createProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
             return "products";
-        if (product.getId() == 0)
+        } else if (product.getId() == 0) {
             productDAO.create(product);
-        else
+        } else {
             productDAO.update(product);
+        }
         return "redirect:/products";
     }
 

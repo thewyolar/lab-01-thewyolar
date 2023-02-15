@@ -35,12 +35,13 @@ public class RoleController {
 
     @PostMapping("/roles/create")
     public String createRole(@Valid @ModelAttribute("role") Role role, BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
             return "roles";
-        if (role.getId() == 0)
+        } else if (role.getId() == 0) {
             roleDAO.create(role);
-        else
+        } else {
             roleDAO.update(role);
+        }
         return "redirect:/roles";
     }
 
