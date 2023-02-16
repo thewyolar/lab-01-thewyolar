@@ -11,7 +11,7 @@ public class Order {
     private Product product;
     @NotNull(message = "Количество продуктов не может быть пустым!")
     private int count;
-    @NotNull(message = "Дата заказа не может быть пустой!")
+    //@NotNull(message = "Дата заказа не может быть пустой!")
     private Date date;
 
     public Order() {}
@@ -49,8 +49,8 @@ public class Order {
         return "Order{" +
                 "id=" + id +
                 ", count=" + count +
-                ", user=" + user.toString() +
-                ", product=" + product.toString() +
+                ", user=" + (user != null ? user.toString() : "") +
+                ", product=" + (product != null ? product.toString() : "") +
                 ", date='" + date + '\'' + '}';
     }
 

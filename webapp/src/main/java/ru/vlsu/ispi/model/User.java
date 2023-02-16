@@ -12,7 +12,7 @@ public class User {
     private String username;
     @NotEmpty(message = "Пароль не может быть пустым!")
     @Size(min = 4, max = 15, message = "Пароль должен быть не меньше {min} и не больше {max} символов!")
-    @Pattern(message = "Неверный пароль!", regexp = "\"^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){8,16}$\"gm")
+    //@Pattern(message = "Неверный пароль!", regexp = "\"^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){8,16}$\"gm")
     private String password;
 
     private Role role;
@@ -48,7 +48,7 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role.toString() + '}';
+                ", role=" + (role != null ? role.toString() : "") + '}';
     }
 
     @Override
