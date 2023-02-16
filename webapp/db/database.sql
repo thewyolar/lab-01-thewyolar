@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS "Users" (
     FOREIGN KEY (role_id) REFERENCES "Roles" (role_id)
 );
 
-INSERT INTO "Users" (user_id, username, password, role_id) VALUES (DEFAULT, 'user1', '123', 1), (DEFAULT, 'user2', '124', 2);
+INSERT INTO "Users" (user_id, username, password, role_id) VALUES (DEFAULT, 'user1@gmail.com', 'm0!N', 1), (DEFAULT, 'user2@gmail.com', 'w5F@', 2);
 
 
 --Продукты--
