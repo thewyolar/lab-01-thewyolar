@@ -27,9 +27,4 @@
         <constructor-arg ref="connection" />
     </bean>
 
-    <bean id="userService" class="ru.vlsu.ispi.service.UserService">
-        <constructor-arg ref="userDAO" />
-        <constructor-arg ref="roleDAO" />
-    </bean>
-
 </beans>

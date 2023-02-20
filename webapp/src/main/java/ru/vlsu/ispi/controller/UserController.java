@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import ru.vlsu.ispi.dao.UserDAO;
 import ru.vlsu.ispi.model.User;
 import ru.vlsu.ispi.service.UserService;
 
