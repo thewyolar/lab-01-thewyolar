@@ -38,8 +38,6 @@ public class RoleController {
             return "roles";
         } else if (role.getId() == 0) {
             roleDAO.create(role);
-        } else {
-            roleDAO.update(role);
         }
         return "redirect:/roles";
     }
@@ -50,10 +48,14 @@ public class RoleController {
         return "redirect:/roles";
     }
 
-    @GetMapping("/roles/update/{roleName}")
-    public String updateRole(@PathVariable("roleName") String roleName, Model model) {
-        model.addAttribute("role", roleDAO.read(roleName));
-        model.addAttribute("roles", roleDAO.getAll());
-        return "roles";
+    @PostMapping("/roles/update")
+    public String updateRole(@Valid @ModelAttribute("role") Role role, @RequestParam("id") Long role_id, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "roles";
+        } else {
+            role.setId(role_id);
+            roleDAO.update(role);
+        }
+        return "redirect:/roles";
     }
 }
