@@ -187,7 +187,7 @@
                 </table>
 
                 <fmt:formatNumber value="${totalPrice}" type="number" maxFractionDigits="2" var="formatedTotalPrice"/>
-                <h4>Общая сумма = <c:out value="${formatedTotalPrice}" /></h4>
+                <p>Общая сумма = <c:out value="${formatedTotalPrice}" /></p>
             </div>
         </div>
     </div>

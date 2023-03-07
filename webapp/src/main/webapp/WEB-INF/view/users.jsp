@@ -15,76 +15,6 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 </head>
 <body>
-<%--    <div class="row">--%>
-<%--        <a href="<c:url value="/"/>">Главная</a>--%>
-<%--    </div>--%>
-<%--    <h1>Пользователи</h1>--%>
-<%--    <c:url var="createAction" value="/users/create"/>--%>
-<%--    <form:form action="${createAction}" modelAttribute="user">--%>
-<%--        <fieldset>--%>
-<%--            <c:choose>--%>
-<%--                <c:when test="${!empty user.username}">--%>
-<%--                    <legend>Редактировать пользователя</legend>--%>
-<%--                    <div class="row">--%>
-<%--                        <form:label path="id"><spring:message text="ID:" /></form:label><br>--%>
-<%--                        <form:input path="id" readonly="true" disabled="true" />--%>
-<%--                        <form:hidden path="id" />--%>
-<%--                    </div>--%>
-<%--                </c:when>--%>
-<%--                <c:otherwise>--%>
-<%--                    <legend>Новый пользователь</legend>--%>
-<%--                </c:otherwise>--%>
-<%--            </c:choose>--%>
-<%--            <div class="row">--%>
-<%--                <form:label path="username"><spring:message text="Имя пользователя:" /></form:label><br>--%>
-<%--                <form:input path="username" /><br>--%>
-<%--                <form:errors path="username" cssClass="error" />--%>
-<%--            </div>--%>
-<%--            <div class="row">--%>
-<%--                <form:label path="password"><spring:message text="Пароль:" /></form:label><br>--%>
-<%--                <form:input path="password" /><br>--%>
-<%--                <form:errors path="password" cssClass="error" />--%>
-<%--            </div>--%>
-<%--            <div class="row">--%>
-<%--                <form:label path="role.name"><spring:message text="Роль:" /></form:label><br>--%>
-<%--                <form:input path="role.name" />--%>
-<%--            </div>--%>
-<%--        </fieldset>--%>
-<%--        <c:if test="${!empty user.username}">--%>
-<%--            <button type="submit"><spring:message text="Редактировать"/></button>--%>
-<%--            <button type="submit"><a href="<c:url value="/users"/>">Отменить</a></button>--%>
-<%--        </c:if>--%>
-<%--        <c:if test="${empty user.username}">--%>
-<%--            <button type="submit" formmethod="post"><spring:message text="Добавить"/></button>--%>
-<%--        </c:if>--%>
-<%--    </form:form>--%>
-
-<%--    <c:if test="${!empty users}">--%>
-<%--        <table>--%>
-<%--            <thead>--%>
-<%--            <tr>--%>
-<%--                <th>ID</th>--%>
-<%--                <th>Username</th>--%>
-<%--                <th>Password</th>--%>
-<%--                <th>Role_id</th>--%>
-<%--            </tr>--%>
-<%--            </thead>--%>
-<%--            <tbody>--%>
-<%--            <c:forEach items="${users}" var="user">--%>
-<%--                <tr>--%>
-<%--                    <td><c:out value="${user.id}" /></td>--%>
-<%--                    <td><a href="<c:url value="/users/${user.username}"/>"><c:out value="${user.username}" /></a></td>--%>
-<%--                    <td><c:out value="${user.password}" /></td>--%>
-<%--                    <td><c:out value="${user.role.id}" /></td>--%>
-<%--                    <td>--%>
-<%--                        <a href="<c:url value="/users/update/${user.username}"/>">Update</a>--%>
-<%--                        <a href="<c:url value="/users/delete/${user.username}"/>" onclick="return confirm('Удалить ${user.username}?')">Delete</a>--%>
-<%--                    </td>--%>
-<%--                </tr>--%>
-<%--            </c:forEach>--%>
-<%--            </tbody>--%>
-<%--        </table>--%>
-<%--    </c:if>--%>
     <p class="ms-3"><a href="<c:url value="/"/>">Главная</a></p>
     <h3 class="mt-4 text-center">Пользователи</h3>
     <div class="container">
@@ -210,7 +140,7 @@
                         </div>
                         <div class="form-group">
                             <form:label path="password"><spring:message text="Пароль:" /></form:label>
-                            <form:input path="password" cssClass="form-control" />
+                            <form:input path="password" type="password" cssClass="form-control" />
                             <form:errors path="password" cssClass="error" />
                         </div>
                         <div class="form-group">

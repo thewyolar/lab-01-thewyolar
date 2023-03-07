@@ -10,15 +10,43 @@
 <html>
 <head>
     <title>Продуктовый магазин</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css"/>">
 </head>
 <body>
-    <h1>Продуктовый магазин</h1>
-    <ol>
-        <li><a href="<c:url value="/roles"/>">Роли</a></li>
-        <li><a href="<c:url value="/users"/>">Пользователи</a></li>
-        <li><a href="<c:url value="/products"/>">Продукты</a></li>
-        <li><a href="<c:url value="/orders"/>">Заказы</a></li>
-    </ol>
+    <h3 class="my-4 text-center">Продуктовый магазин</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Роли</div>
+                            <a href="<c:url value="/roles"/>">Таблица ролей</a>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Пользователи</div>
+                            <a href="<c:url value="/users"/>">Таблица пользователей</a>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Продукты</div>
+                            <a href="<c:url value="/products"/>">Таблица продуктов</a>
+                        </div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">Заказы</div>
+                            <a href="<c:url value="/orders"/>">Таблица заказов</a>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.bundle.min.js"/>"></script>
 </body>
 </html>

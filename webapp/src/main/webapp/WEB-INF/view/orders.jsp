@@ -95,7 +95,7 @@
                                             <c:if test="${!empty order.date}">
                                                 <div class="form-group">
                                                     <form:label path="date"><spring:message text="Дата:" /></form:label>
-                                                    <form:input path="date" value="${order.date}" cssClass="form-control" />
+                                                    <form:input path="date" type="date" value="${order.date}" cssClass="form-control" />
                                                     <form:errors path="date" cssClass="error" />
                                                 </div>
                                             </c:if>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="form-group">
                             <form:label path="date"><spring:message text="Дата:" /></form:label>
-                            <form:input path="date" cssClass="form-control" />
+                            <form:input path="date" type="date" cssClass="form-control" />
                             <form:errors path="date" cssClass="error" />
                         </div>
                     </div>
