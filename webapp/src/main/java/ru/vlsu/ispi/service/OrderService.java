@@ -62,6 +62,10 @@ public class OrderService implements IService<Order, Long> {
 
     @Override
     public boolean update(Order order) {
+        User user = userDAO.read(order.getUser().getUsername());
+        order.getUser().setId(user.getId());
+        Product product = productDAO.read(order.getProduct().getName());
+        order.getProduct().setId(product.getId());
         return orderDAO.update(order);
     }
 

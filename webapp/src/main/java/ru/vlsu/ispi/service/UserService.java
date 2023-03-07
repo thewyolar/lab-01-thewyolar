@@ -3,6 +3,7 @@ package ru.vlsu.ispi.service;
 import org.springframework.stereotype.Service;
 import ru.vlsu.ispi.dao.RoleDAO;
 import ru.vlsu.ispi.dao.UserDAO;
+import ru.vlsu.ispi.model.Product;
 import ru.vlsu.ispi.model.Role;
 import ru.vlsu.ispi.model.User;
 
@@ -51,6 +52,8 @@ public class UserService implements IService<User, String> {
 
     @Override
     public boolean update(User user) {
+        Role role = roleDAO.read(user.getRole().getName());
+        user.getRole().setId(role.getId());
         return userDAO.update(user);
     }
 

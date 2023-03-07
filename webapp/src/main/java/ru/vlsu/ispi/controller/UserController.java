@@ -11,6 +11,7 @@ import ru.vlsu.ispi.service.UserService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
 
@@ -18,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public String getUsers(Model model) {
         List<User> users = userService.getAll();
         model.addAttribute("users", users);
@@ -26,20 +27,12 @@ public class UserController {
         return "users";
     }
 
-    @GetMapping("/users/{username}")
-    public String readUser(@PathVariable("username") String username, Model model) {
-        model.addAttribute("user", userService.read(username));
-        return "user";
-    }
-
-    @PostMapping("/users/create")
+    @PostMapping("/create")
     public String createUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "users";
         } else if (user.getId() == 0) {
             userService.create(user);
-        } else {
-            userService.update(user);
         }
         return "redirect:/users";
     }
@@ -50,10 +43,14 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/users/update/{username}")
-    public String updateUser(@PathVariable("username") String username, Model model) {
-        model.addAttribute("user", userService.read(username));
-        model.addAttribute("users", userService.getAll());
-        return "users";
+    @PostMapping("/update")
+    public String updateUser(@Valid @ModelAttribute("user") User user, @RequestParam("id") Long user_id, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "users";
+        } else {
+            user.setId(user_id);
+            userService.update(user);
+        }
+        return "redirect:/users";
     }
 }

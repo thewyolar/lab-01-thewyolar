@@ -11,6 +11,7 @@ import ru.vlsu.ispi.model.Product;
 import java.util.List;
 
 @Controller
+@RequestMapping("/products")
 public class ProductController {
     private final ProductDAO productDAO;
 
@@ -18,7 +19,7 @@ public class ProductController {
         this.productDAO = productDAO;
     }
 
-    @GetMapping("/products")
+    @GetMapping
     public String getProducts(Model model) {
         List<Product> products = productDAO.getAll();
         model.addAttribute("products", products);
@@ -26,34 +27,30 @@ public class ProductController {
         return "products";
     }
 
-    @GetMapping("/products/{productName}")
-    public String readProduct(@PathVariable("productName") String productName, Model model) {
-        model.addAttribute("product", productDAO.read(productName));
-        return "product";
-    }
-
-    @PostMapping("/products/create")
+    @PostMapping("/create")
     public String createProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "products";
         } else if (product.getId() == 0) {
             productDAO.create(product);
-        } else {
-            productDAO.update(product);
         }
         return "redirect:/products";
     }
 
-    @GetMapping("/products/delete/{productName}")
+    @GetMapping("/delete/{productName}")
     public String deleteProduct(@PathVariable("productName") String productName) {
         productDAO.delete(productName);
         return "redirect:/products";
     }
 
-    @GetMapping("/products/update/{productName}")
-    public String updateProduct(@PathVariable("productName") String productName, Model model) {
-        model.addAttribute("product", productDAO.read(productName));
-        model.addAttribute("products", productDAO.getAll());
-        return "products";
+    @PostMapping("/update")
+    public String updateProduct(@Valid @ModelAttribute("order") Product product, @RequestParam("id") Long product_id, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "products";
+        } else {
+            product.setId(product_id);
+            productDAO.update(product);
+        }
+        return "redirect:/products";
     }
 }

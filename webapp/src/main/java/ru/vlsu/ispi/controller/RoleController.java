@@ -11,6 +11,7 @@ import ru.vlsu.ispi.model.Role;
 import java.util.List;
 
 @Controller
+@RequestMapping("/roles")
 public class RoleController {
     private final RoleDAO roleDAO;
 
@@ -18,7 +19,7 @@ public class RoleController {
         this.roleDAO = roleDAO;
     }
 
-    @GetMapping("/roles")
+    @GetMapping
     public String getRoles(Model model) {
         List<Role> roles = roleDAO.getAll();
         model.addAttribute("roles", roles);
@@ -26,13 +27,7 @@ public class RoleController {
         return "roles";
     }
 
-    @GetMapping("/roles/{roleName}")
-    public String readRole(@PathVariable("roleName") String roleName, Model model) {
-        model.addAttribute("role", roleDAO.read(roleName));
-        return "role";
-    }
-
-    @PostMapping("/roles/create")
+    @PostMapping("/create")
     public String createRole(@Valid @ModelAttribute("role") Role role, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "roles";
@@ -42,13 +37,13 @@ public class RoleController {
         return "redirect:/roles";
     }
 
-    @GetMapping("/roles/delete/{roleName}")
+    @GetMapping("/delete/{roleName}")
     public String deleteRole(@PathVariable("roleName") String roleName) {
         roleDAO.delete(roleName);
         return "redirect:/roles";
     }
 
-    @PostMapping("/roles/update")
+    @PostMapping("/update")
     public String updateRole(@Valid @ModelAttribute("role") Role role, @RequestParam("id") Long role_id, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "roles";

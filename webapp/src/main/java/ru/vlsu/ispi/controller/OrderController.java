@@ -11,6 +11,7 @@ import ru.vlsu.ispi.service.OrderService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/orders")
 public class OrderController {
     private final OrderService orderService;
 
@@ -18,42 +19,38 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/orders")
-    public String home(Model model) {
+    @GetMapping
+    public String getOrders(Model model) {
         List<Order> orders = orderService.getAll();
         model.addAttribute("orders", orders);
         model.addAttribute("order", new Order());
         return "orders";
     }
 
-    @GetMapping("/orders/{id}")
-    public String readOrder(@PathVariable("id") long id, Model model) {
-        model.addAttribute("order", orderService.read(id));
-        return "order";
-    }
-
-    @PostMapping("/orders/create")
+    @PostMapping("/create")
     public String createOrder(@Valid @ModelAttribute("order") Order order, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "orders";
         } else if (order.getId() == 0) {
             orderService.create(order);
-        } else {
-            orderService.update(order);
         }
         return "redirect:/orders";
     }
 
-    @GetMapping("/orders/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteOrder(@PathVariable("id") long id) {
         orderService.delete(id);
         return "redirect:/orders";
     }
 
-    @GetMapping("/orders/update/{id}")
-    public String updateOrder(@PathVariable("id") long id, Model model) {
-        model.addAttribute("order", orderService.read(id));
-        model.addAttribute("orders", orderService.getAll());
-        return "orders";
+    @PostMapping("/update")
+    public String updateOrder(@Valid @ModelAttribute("order") Order order, @RequestParam("id") Long id, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "orders";
+        } else {
+            order.setId(id);
+            orderService.update(order);
+        }
+        return "redirect:/orders";
     }
 }
